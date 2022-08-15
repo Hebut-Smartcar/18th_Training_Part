@@ -1,0 +1,52 @@
+主板需要使用P54引脚作为软件复位按键使用。
+并且在STC-ISP下载的时候，需要设置P54引脚作为复位引脚使用。
+
+
+无线转串口
+UART4 
+RX 			P02 
+TX 			P03
+RTS_PIN
+
+
+编码器2个
+DIR 
+LSB CTIM0_P34
+
+DIR 
+LSB CTIM3_P04
+
+
+ICM20602:
+SPC	P25
+SDI	P23
+SDO	P24
+CS	P26
+
+
+SPI屏幕引脚:
+SCL	P16
+SDA	P17
+RST	P20
+DC	P21
+CS	P22
+BL	P27
+
+
+
+线性CCD（第一个）:
+CLK: 
+SI:	 
+AO:	 P13
+
+线性CCD（第二个）:
+CLK: 
+SI:	 
+AO:  P14
+
+2个电机:
+P60
+P62
+
+P64
+P66

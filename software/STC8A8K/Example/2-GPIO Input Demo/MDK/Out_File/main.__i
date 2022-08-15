@@ -1,0 +1,1 @@
+"..\USER\src\main.c" LARGE OMF2 OPTIMIZE (8,SPEED) BROWSE INCDIR(..\..\Libraries\libraries;..\..\Libraries\seekfree_libraries;..\..\Libraries\seekfree_peripheral;..\USER\inc;..\USER\src;..\CODE) DEBUG PRINT(.\Out_File\main.lst) OBJECT(.\Out_File\main.obj)
