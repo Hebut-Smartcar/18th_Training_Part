@@ -4,11 +4,17 @@
 
 
 
-software 文件夹下放软件培训资料  
+├─software	//软件培训资料  
 
-hardware 文件夹下放硬件培训资料
+├─hardware	//硬件培训资料
 
-IMAGE 文件夹下放图像
+├─IMAGE	//readme图像
+
+└─hardware_image
+
+└─software_image
+
+
 
 [git commit 规范](https://zhuanlan.zhihu.com/p/182553920)
 
