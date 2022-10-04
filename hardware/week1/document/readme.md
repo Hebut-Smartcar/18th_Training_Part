@@ -144,36 +144,72 @@
 
 #### 	串行接口(serial port)
 
+串行接口是嵌入式系统中最常用的数据传输接口，串行接口有着数据传输的规定以及对应接口的规定，常见的接口规定有RS232，这种接口在老式PC，现在的工控机中均有大量出现，外形图如下图：
 
+![](https://ts1.cn.mm.bing.net/th/id/R-C.2528188aee2022c35f4b76de52435b58?rik=QdIqrEaaNjckOg&riu=http%3a%2f%2fwww.lulian.cn%2fimages%2f201412%2f1417545331470045305.jpg&ehk=G9UGL9o7F8hEmB88cHE1BKbkqA9w05IeuASdwq6DJPw%3d&risl=&pid=ImgRaw&r=0)
+
+我们智能车上的嵌入式应用主要是用来进行短距离的数据交换，所以用不上上述的RS232的规定，我们需要用到的是遵循基本TTL电平的串口传输，数据类型如下图所示
+
+![](/IMAGE/hardware_image/UART帧格式.png)
+
+这里我们只需要简单了解一下这种传输数据的方式就行，具体的数据格式和电平定义的方式会在后续的培训中进行详细的讲解
 
 #### 	屏幕(screen)
 
+屏幕，大家天天见，屏幕可以用来显示一些需要调试的数据或者监控的变量（变量指的是在运作过程中会变化的数据），智能车中也会用上不同的屏幕类型。和大家电脑或者手机的显示器的屏幕类型一样，可以分为IPS、TN等，这里不作详细介绍了。像下面的屏幕就是使用串口这种数据传输规定来驱动显示内容的屏幕
 
+![](https://gd1.alicdn.com/imgextra/i4/2364650632/O1CN01BtcVHe1GXV4N8DtEQ_!!2364650632.jpg)
 
 #### 	蜂鸣器(beep)
 
+哔————
 
+用以方便调试，毕竟小车一直在跑，不可能一直跟着跑看屏幕，这时候蜂鸣器刺耳且向量的身影往往能给调试着们带来极大的安全感（PS：或者是极大的恐惧），取决于你的代码。
+
+![](https://ts1.cn.mm.bing.net/th/id/R-C.5c684754f4af688b09b0bc0bc5ba2027?rik=O%2f4i0HXzP3k0uw&riu=http%3a%2f%2fjkrnrwxhlkki5q.leadongcdn.cn%2fcloud%2fioBqkKqrSRrkmokmiki%2ffengmingqi.jpg&ehk=bHTG6NQvxwrbFzX8IrNhsnrJZwiaAGQAHMxBWprWMoI%3d&risl=&pid=ImgRaw&r=0)
+
+这玩意一直叫的话能吵死人（
 
 #### 	旋钮，又称旋转编码器(rotary encoder)
 
+旋钮交互，日常生活中也很常见，如音响的音量旋钮。旋钮有用电位器实现的，也有用旋转编码器实现的，这里我们主要用的是旋转编码器，如下图。旋转编码器可以极大的方便各种参数的调试，是智能车人机交互方式的不二之选
 
+![](https://ts1.cn.mm.bing.net/th/id/R-C.411a1d6a8f23333eb73f9caf7670ebbc?rik=iaueeFC7tqdIew&riu=http%3a%2f%2fwww.best-dz.com%2fUploadFiles%2f2014-11%2fadmin%2f2014112116291167393.jpg&ehk=A%2fk23wy3cMb%2bGIlI0850jjGZIp37hSY3P%2bGougwgaj0%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1)
 
 #### 	拨码开关(dip switch)
 
+拨码开关是一种开关，它将使得输入给单片机的某几个信号一直处于0或者1的状态，一般用于单片机程序工作模式的选择，后续会在软件中具体讲解应用方式，实物如下图
 
+![](https://tse4-mm.cn.bing.net/th/id/OIP-C.R28Pv_n-au69NDL9FBOapAHaHa?pid=ImgDet&rs=1)
 
 #### 	按键(button)
 
-
+按键，不用我多说吧，你们手机上的电源音量键等都是按键的一种，我就不多解释了（主要是懒
 
 #### 	发光二极管(LED)
+
+发光二极管通过光信号能快速的向人传递某种状态的信息，一般用以电路板整版功能验证，检测单片机程序是否正常运行。这里的LED是指的能焊接在电路板上的LED，一般情况下长下面这个样子
+
+![](https://alimg.szlcsc.com/upload/public/product/source/20180907/377825F7866594E345B797D823A8FDE3.jpg)
 
 ### 动力相关
 
 #### 	电机(motor)
 
+智能车小车的肌肉，小车跑动的动力来源，电机需要通过专门的电机驱动电路来驱动才能正常的控制其正反转与速度的大小。一般使用的控制方法为PWM控制，后续在硬件和软件的培训中均会深入讲解，有兴趣的可以现在就先去看看，你会发现，智能车的大多控制就和魔法一样神奇
 
+驱动电机的电路板
+
+![](https://gd4.alicdn.com/imgextra/i4/2364650632/O1CN01Cmozu71GXV1mMYfSl_!!2364650632.jpg)
+
+智能车常用的电机
+
+![](https://gd1.alicdn.com/imgextra/i1/2364650632/TB2e.RwjtRopuFjSZFtXXcanpXa_!!2364650632.jpg)
 
 #### 	舵机（servo）
 
-​	
+用以四轮车模的转向控制，舵机根据不同的种类可以将PWM信号转化成为齿轮的位置或者是齿轮旋转的方向和角度。舵机是四轮车（强调四轮车是因为还有不用舵机调整拐向位置的车模，例如直立车和三轮车，这些请大家自行了解）方向控制的重要结构，类似汽车的前轮打角的功能，下图为舵机的图片
+
+![](https://gd2.alicdn.com/imgextra/i4/2364650632/O1CN01mmpM221GXV5zpy0a5_!!2364650632.jpg)
+
+## 这里第一周的硬件内容就暂告一段落了
