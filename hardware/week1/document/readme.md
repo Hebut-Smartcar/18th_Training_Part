@@ -164,7 +164,7 @@
 
 哔————
 
-用以方便调试，毕竟小车一直在跑，不可能一直跟着跑看屏幕，这时候蜂鸣器刺耳且向量的身影往往能给调试着们带来极大的安全感（PS：或者是极大的恐惧），取决于你的代码。
+用以方便调试，毕竟小车一直在跑，不可能一直跟着跑看屏幕，这时候蜂鸣器刺耳且响亮的声音往往能给调试着们带来极大的安全感（PS：或者是极大的恐惧），取决于你的代码。
 
 ![](https://ts1.cn.mm.bing.net/th/id/R-C.5c684754f4af688b09b0bc0bc5ba2027?rik=O%2f4i0HXzP3k0uw&riu=http%3a%2f%2fjkrnrwxhlkki5q.leadongcdn.cn%2fcloud%2fioBqkKqrSRrkmokmiki%2ffengmingqi.jpg&ehk=bHTG6NQvxwrbFzX8IrNhsnrJZwiaAGQAHMxBWprWMoI%3d&risl=&pid=ImgRaw&r=0)
 
