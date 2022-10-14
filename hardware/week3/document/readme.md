@@ -8,7 +8,7 @@
 
 ### 1、驱动电路的核心----H桥
 
-![H桥](F:\Good\hardware\week3\document\H桥.png)
+![H桥](https://github.com/X-iye/Textnoob/blob/master/Image/H%E6%A1%A5.png?raw=true)
 
  从上图可以看出，驱动电路是由四个N[MOS管](https://so.csdn.net/so/search?q=MOS管&spm=1001.2101.3001.7020)，一个motor，以及VCC，GND所构成的。驱动芯片可以控制栅极的电平高低，来控制NMOS管的开通与关闭，所以可以通过控制四个栅极的状态来控制MOS管的开通与关断，从而达到控制电机正反转的效果。通过调控不同PWM占空比，达到控制电机转速快慢的效果。这种驱动电路就叫做**H桥**
 
