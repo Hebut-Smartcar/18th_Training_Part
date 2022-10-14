@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/m1.ico</file>
+        <file>image/m10.ico</file>
+        <file>image/m11.ico</file>
+        <file>image/m12.ico</file>
+        <file>image/m13.ico</file>
+        <file>image/m14.ico</file>
+        <file>image/m15.png</file>
+        <file>image/m16.png</file>
+        <file>image/m17.png</file>
+        <file>image/m18.png</file>
+        <file>image/m19.ico</file>
+        <file>image/m2.ico</file>
+        <file>image/m3.ico</file>
+        <file>image/m4.ico</file>
+        <file>image/m5.ico</file>
+        <file>image/m6.ico</file>
+        <file>image/m7.ico</file>
+        <file>image/m8.ico</file>
+        <file>image/m9.ico</file>
+        <file>image/m18.jpg</file>
+        <file>image/m20.ico</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Help</class>
+ <widget class="QWidget" name="Help">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>772</width>
+    <height>465</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QPushButton" name="githubButton">
+     <property name="text">
+      <string>GitHub</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QPlainTextEdit" name="plainTextEdit">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="plainText">
+      <string>开发者：BriMon
+邮箱：1610937885@qq.com
+GitHub：https://github.com/BriMonzZY
+Gitee：https://gitee.com/brimon-zzy
+
+
+使用文档：
+
+注意：
+因为接收原理不同以及为了防止数据错乱，图传和其他功能不能共用。
+下位机上传数据时也应避免同时发送。
+
+
+保存图片功能：
+开始保存图片以后，首先选择要存到的位置。每一帧图片都会被保存，直到停止保存。
+
+
+
+下位机协议：
+图传协议：
+
+参数调整协议：
+
+
+</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
