@@ -52,9 +52,7 @@
 
 ##### 1.引脚图
 
-<img src="https://github.com/X-iye/Textnoob/blob/master/Image/%E5%BC%95%E8%84%9A.png?raw=true" style="zoom:50%;" />
-
-
+![](https://raw.githubusercontent.com/Hebut-Smartcar/18th_Training_Part/main/IMAGE/hardware_image/Week3/%E5%BC%95%E8%84%9A.png)
 
 | 引脚名称 | 引脚标号 | 引脚功能&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
 | :------: | :------: | :----------------------------------------------------------: |
@@ -84,11 +82,11 @@ PS：由于MOS管导通后会产生一定的**饱和压降**(Vsat，不同芯片
 
 ##### 2、芯片内部功能框图及外部电路设计
 
-![](https://github.com/X-iye/Textnoob/blob/master/Image/DRV8701E%E5%85%B8%E5%9E%8B%E7%94%B5%E8%B7%AF.png?raw=true)
+![](https://raw.githubusercontent.com/Hebut-Smartcar/18th_Training_Part/main/IMAGE/hardware_image/Week3/DRV8701E典型电路.png))
 
 ##### 3、PWM栅极驱动模式
 
-![](https://github.com/X-iye/Textnoob/blob/master/Image/PWM%E8%B0%83%E6%8E%A7.png?raw=true)
+![](https://raw.githubusercontent.com/Hebut-Smartcar/18th_Training_Part/main/IMAGE/hardware_image/Week3/PWM%E8%B0%83%E6%8E%A7.png)
 
 DRV8701中的栅极驱动器直接驱动N沟道MOSFET，从而驱动**电机电流**。高压侧栅极驱动由电荷泵提供，低压侧栅极驱动器电压由内部
 
@@ -103,6 +101,20 @@ DRV8701中的栅极驱动器直接驱动N沟道MOSFET，从而驱动**电机电�
 **GH1GH2和GL1GL2**,控制4个MOS管的栅极，**SH1和SH2**控制源级和漏级同时连接电机(见上图)
 
 至于详细的地方，如内部的逻辑控制或者详细的电路设计，都可以在**数据手册**里找到
+
+
+
+#### **IR2104**
+
+##### 1.引脚图
+
+![](https://raw.githubusercontent.com/Hebut-Smartcar/18th_Training_Part/main/IMAGE/hardware_image/Week3/IR2104%E5%BC%95%E8%84%9A.png)
+
+##### 2.具体讲解
+
+相应讲解可以看下面博客
+
+[IR2104驱动讲解](https://blog.csdn.net/zhuimeng_ruili/article/details/104378131)
 
 
 
@@ -125,6 +137,8 @@ PS：老师讲的是真的很详细，听完他的课后，足以让一个从来
 所谓原理图，就是表示电路板上各器件之间连接原理的图表，是不同完整电路的组合，一个完善没有缺漏的原理图是画好PCB的基础。文字还是不如视频，建议大家直接观看视频的**P9-P13**完成学习
 
 
+
+**本周任务为绘制IR2104驱动电路，相应的原理图在Task文件夹下，请大家按时完成**
 
 
 
