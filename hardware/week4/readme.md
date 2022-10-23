@@ -6,7 +6,7 @@
 
 注意掌握导入的方法及错误修正
 
-[[18th_Training_Part/图片001.jpg at main · Hebut-Smartcar/18th_Training_Part (github.com)](https://github.com/Hebut-Smartcar/18th_Training_Part/blob/main/hardware/week4/document/图片001.jpg)](https://github.com/Hebut-Smartcar/18th_Training_Part/blob/main/hardware/week4/clip_image001.png)
+![](https://github.com/Hebut-Smartcar/18th_Training_Part/blob/main/IMAGE/hardware_image/clip_image001.png)
 
 **2>** **规则设置**
 
@@ -14,7 +14,7 @@
 
 推荐使用PCB的快捷键设置：
 
-[18th_Training_Part/图片002.jpg at main · Hebut-Smartcar/18th_Training_Part (github.com)](https://github.com/Hebut-Smartcar/18th_Training_Part/blob/main/hardware/week4/document/图片002.jpg)
+![](https://github.com/Hebut-Smartcar/18th_Training_Part/blob/main/IMAGE/hardware_image/clip_image003.png)
 
 ​    
 
@@ -22,11 +22,11 @@
 
 间距规则：线距，华秋还是比较友善的，免费打板要求最小线距>5mil。由于以前用嘉立创打板子，其最小线宽要求是6mil，因此一直沿用。（同时，给同胞门提个醒，嘉立创改规则了，想要在嘉立创免费打板子，需要使用嘉立创的EDA设计，或者上个月消费超过20元）
 
-[18th_Training_Part/图片003.jpg at main · Hebut-Smartcar/18th_Training_Part (github.com)](https://github.com/Hebut-Smartcar/18th_Training_Part/blob/main/hardware/week4/document/图片003.jpg)
+![](https://github.com/Hebut-Smartcar/18th_Training_Part/blob/main/IMAGE/hardware_image/clip_image005.png)
 
 ​    线宽规则：华秋要求最小线宽在5mil，一般信号线的线宽比较小，这样可以更好的传输信号；电源线的线宽较大一些，以保证通过足够大的电流.
 
-[18th_Training_Part/图片004.jpg at main · Hebut-Smartcar/18th_Training_Part (github.com)](https://github.com/Hebut-Smartcar/18th_Training_Part/blob/main/hardware/week4/document/图片004.jpg)
+![](https://github.com/Hebut-Smartcar/18th_Training_Part/blob/main/IMAGE/hardware_image/clip_image007.png)
 
 ​    过孔规则：华秋要求孔径在0.2mm（约等于8mil）以上
 
@@ -54,7 +54,7 @@
 
  
 
-[[18th_Training_Part/图片005.jpg at main · Hebut-Smartcar/18th_Training_Part (github.com)](https://github.com/Hebut-Smartcar/18th_Training_Part/blob/main/hardware/week4/document/图片005.jpg)](https://github.com/Hebut-Smartcar/18th_Training_Part/blob/main/hardware/week4/clip_image009.png)
+![](https://github.com/Hebut-Smartcar/18th_Training_Part/blob/main/IMAGE/hardware_image/clip_image009.png)
 
 ​    
 
