@@ -14,6 +14,8 @@
 <li>五.合适的调参工具</li>
 </ul>
 
+<dev>
+
 <h3>一.前言</h3>
 
 <p>本周主要涉及重点内容是<strong>两种常见的通信协议：IIC和SPI</strong>，需要熟悉的内容的是<strong>flash读写操作和调参工具</strong>。<br>
@@ -22,14 +24,12 @@
 <h3>二.数据和flash读写</h3>
 
 <ul>
-
     <li><h4>RAM和ROM：</h4>
         <ol>
             <li>在单片机中，指令和数据均以二进制的方式存储，这取决于物理电路的低电平和高电平，低电平为0，高电平为1，这样就使得一切数据都是以二进制的方式存储。</li>
             <li>在现代计算机体系中，存储系统主要分为ROM和RAM两部分，把他们代入到计算机上就是内存和硬盘，RAM具有<strong>掉电数据丢失</strong>的特点,而ROM具有<strong>掉电数据不易丢失</strong>的特点，最通俗易懂的解释就是我们每次关机都会结束目前进行的进程，再次开机所有进程都需要重新启动，而硬盘里的文件等等基本不会因为开关机而发生变化。</li>
         </ol>
     </li>
-    
     <li><h4>stm32单片机中的flash映射：</h4>
         <ol>
             <li>flash基本概念：stm32中的flash，相当于对代码的储存空间,stm32的flash地址起始于0x08000000，结束地址是0x08000000加上芯片实际的flash大小，不同的芯片flash大小不同。</li>
@@ -38,10 +38,9 @@
             <li>内存映射：STM32单片机将外设映射为地址，再操作地址对应的外设，这个过程可以这么解释：例如片上外设的起始地址为0x40000000，在总线ABP1上地址，范围是0x40000000至0x4000FFFF，说明总线上的外设空间大小是FFFF（十六进制），即64K。ABP1上的DAC外设，其对应的地址空间是0x40007400至0x400077FF,大小为1K,可基于外设地址0x40000000移位得到。</li>
         </ol>
     </li>
-
 </ul>
 
-
+</ul>
 
 <img title="" src="https://images2018.cnblogs.com/blog/671539/201808/671539-20180815231321785-1226074049.png" alt="Image text" data-align="right">
 
@@ -53,9 +52,7 @@
     <li><h4>主从设备之间通信：</h4>
     单片机除了能控制片上外设，还能对其他一系列外设进行控制，这取决于被控制设备数据手册中提供的通信手段。有些简单设备是单片机通过串口发送特定的信息序列，但智能车更多的是通过IIC和SPI通信以达到控制从设备的目的，下面将介绍这两种通信方式。
     </li>
-
     <li><h4>IIC通信：</h4>
-    
         <ul>
         <li>概述：IIC通信是由<strong>数据线SDA</strong>和<strong>时钟线SCL</strong>构成的串行总线，用于发送和接收数据。</li>
         <li>IIC状态：
@@ -66,22 +63,18 @@
                     其中，当SCL处于高期间，SDA一直为高没有变化，则为空闲状态，不进行数据的发送和接收。
                     <img src="https://img2018.cnblogs.com/blog/1477786/201905/1477786-20190522185103134-1401961545.jpg" alt="图片alt" title="IIC的起始与停止">
                 </li>
-                
                 <li>主设备发送数据：<br>
                     <strong>SCL:</strong>SCL在开始信号触发后，开始产生脉冲，在上升沿时准备好数据，进行传送数据时，SDA拉高（发送1）或拉低（发送0），在这期间，SDA线电平保持不变。<br>
                     <strong>SDA:</strong>在SCL高电平时保持稳定，发送数据，除此之外可以变换电平，取决于下一个SCL脉冲要发送的数据。<br>
                     例如发送8个高电平，也就是发送数据11111111，开始信号产生后，SCL会正常产生8个脉冲，此时SDA可以一直处于高电平不用变化，因为数据要求他传输8个1。<br>
                     若为发送数据10101010，那么开始信号产生后，SCL会正常产生8个脉冲，此时SDA在第一个脉冲内必须是高电平，而SCL变为低电平后，SDA需要在第二个脉冲前变为低电平，并在第二个脉冲期间保持低电平不变，才能使数据正常传输。
                     <img src="https://img-blog.csdnimg.cn/20200407162837546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2FzNDgwMTMzOTM3,size_16,color_FFFFFF,t_70" alt="图片alt" title="主设备发送数据">
-    
                 </li>
-                
                 <li>从设备的应答信号：<br>
                     当开始信号发生后，主设备开始向从设备发送信息，而从设备需要发送一个ACK信号来表示自己收到了信息。<br>
                     主设备发送信号后，需要从设备返回一个应答信号来观察从设备是否接收到数据，经过8个SCL脉冲后，<strong>在第九个SCL脉冲期间</strong>，从设备SDA拉低且不变则为接收到数据，反之则没有接收到。原因是8次脉冲代表主设备发送了一次数据，而主从设备共用一个SCL时钟线。
                     <img src="https://img2018.cnblogs.com/blog/1477786/201905/1477786-20190522185701351-301948286.png" alt="图片alt" title="从设备的应答信号">
                 </li>
-    
                 <li>主设备接收数据：<br>
                     这一部分是单片机和从设备通信的主要目的，因为单片机想要通过从设备（例如陀螺仪）获取一些信息从而进行控制，那么就需要陀螺仪不断地向他发送数据，单片机不断接收设备。<br>
                     <strong>步骤如下：</strong>
@@ -99,11 +92,8 @@
             </ol>
         </li>
         </ul>
-    
     </li>
-    
     <li><h4>SPI通信：</h4>
-    
         <ul>
         <li><strong>概述：</strong>SPI接口一般使用四条信号线通信：<strong>SDI（数据输入），SDO（数据输出），SCK（时钟），CS（片选）</strong><br>
             SPI分为主、从两种模式，一个SPI通讯系统需要包含一个（且只能是一个）主设备，一个或多个从设备。提供时钟的为主设备（Master），接收时钟的设备为从设备（Slave），SPI接口的读写操作，都是由主设备发起。当存在多个从设备时，通过各自的片选信号进行管理。<br>
@@ -114,41 +104,27 @@
             数据线的对应时SDI对应MOSI，SDO对应MISO，以此来看主设备需要的引脚是输出还是输入。
             <img src="https://img-blog.csdnimg.cn/20200429141530267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2FzNDgwMTMzOTM3,size_16,color_FFFFFF,t_70" alt="图片alt" title="SPI通信">
         </li>
-    
         <li>
             <strong>主设备进行SPI通信的从设备选择：</strong>
             由于有片选信号的存在，只要从主从设备之间的CS片选信号线拉低，则代表主从设备通信，对于单一从设备，CS默认为低电平就可以了。
         </li>
-    
         <li>
             <strong>SPI通信的四种模式：</strong>
             <stong>SPI的四种模式，简单地讲就是设置SCLK时钟信号线的那种信号为有效信号</stong><br>
-    
             SPI通信有4种不同的操作模式，不同的从设备可能在出厂是就是配置为某种模式，这是不能改变的；但我们的通信双方必须是工作在同一模式下，所以我们可以对我们的主设备的SPI模式进行配置，通过CPOL（时钟极性）和CPHA（时钟相位）来控制我们主设备的通信模式，具体如下：
-    
             <ol>
                 <li>Mode0：CPOL=0，CPHA=0：此时空闲态时，SCLK处于低电平，数据采样是在第1个边沿，也就是SCLK由低电平到高电平的跳变，所以数据采样是在上升沿(准备数据），（发送数据）数据发送是在下降沿。</li>
-    
                 <li>Mode1：CPOL=0，CPHA=1：此时空闲态时，SCLK处于低电平，数据发送是在第1个边沿，也就是SCLK由低电平到高电平的跳变，所以数据采样是在下降沿，数据发送是在上升沿。</li>
-    
                 <li>Mode2：CPOL=1，CPHA=0：此时空闲态时，SCLK处于高电平，数据采集是在第1个边沿，也就是SCLK由高电平到低电平的跳变，所以数据采集是在下降沿，数据发送是在上升沿。</li>
-    
                 <li>Mode3：CPOL=1，CPHA=1：此时空闲态时，SCLK处于高电平，数据发送是在第1个边沿，也就是SCLK由高电平到低电平的跳变，所以数据采集是在上升沿，数据发送是在下降沿。</li>
-    
             </ol>
-    
             <img src="https://img-blog.csdnimg.cn/20200429212715554.png" alt="图片alt" title="SPI通信的四种模式">
-    
         </li>
         </ul>
     </li>
 </ul>
 
-
-
-
-
-
+<div>
 <h3>四.实际应用之陀螺仪和屏幕</h3>
 <ul>
     <li><h4>陀螺仪（以ICM42605为例子）：</h4></li>
@@ -161,13 +137,29 @@
             <li>SPI初始化，单片机的引脚有SPI的工作脚模式，可以作为主从设备通信引脚。</li>
             <li>陀螺仪初始化，根据数据手册配置好各项陀螺仪需要的寄存器数据。</li>
             <li>通过SPI的读写操作来控制陀螺仪。</li> 
-        </ol> 
+        </ol>
+    <li><h4>屏幕：</h4>
+    <ul>
+        <li>屏幕的驱动已经成熟，主设备和屏幕的通信方式采用IPS，请同学下载相关例程进行学习。</li>
+    </ul>
+    </li>    
 </ul>
+</div>
+
+</ul>
+</div>
+
+</ul>
+
+</div>
+
+</ul>
+
+</dev>
 
 > Tri-core的TC377硬件SPI配置如下
 
 ```c
-
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      SPI初始化
 //  @param      spi_n           选择SPI模块(SPI_1-SPI_4)
@@ -183,62 +175,62 @@
 void spi_init(SPIN_enum spi_n, SPI_PIN_enum sck_pin, SPI_PIN_enum mosi_pin, SPI_PIN_enum miso_pin, SPI_PIN_enum cs_pin, uint8 mode, uint32 baud)
 {
 
-	IfxQspi_SpiMaster_Config MasterConfig;
-	IfxQspi_SpiMaster MasterHandle;
-	IfxQspi_SpiMaster_Channel MasterChHandle;
-	IfxQspi_SpiMaster_Pins MasterPins;
-	IfxQspi_SpiMaster_Output SlsoPin;
-	volatile Ifx_QSPI *moudle;
+    IfxQspi_SpiMaster_Config MasterConfig;
+    IfxQspi_SpiMaster MasterHandle;
+    IfxQspi_SpiMaster_Channel MasterChHandle;
+    IfxQspi_SpiMaster_Pins MasterPins;
+    IfxQspi_SpiMaster_Output SlsoPin;
+    volatile Ifx_QSPI *moudle;
 
-	moudle = IfxQspi_getAddress((IfxQspi_Index)spi_n);
+    moudle = IfxQspi_getAddress((IfxQspi_Index)spi_n);
 
-	spi_mux(spi_n, sck_pin, mosi_pin, miso_pin, cs_pin, &MasterPins, &SlsoPin);
+    spi_mux(spi_n, sck_pin, mosi_pin, miso_pin, cs_pin, &MasterPins, &SlsoPin);
 
-	IfxQspi_SpiMaster_initModuleConfig(&MasterConfig, moudle);
-	MasterConfig.base.mode = SpiIf_Mode_master;
-	MasterConfig.base.maximumBaudrate = MAX_BAUD;
-	MasterConfig.base.isrProvider = IfxSrc_Tos_cpu0;
-
-
-	MasterConfig.pins = &MasterPins;
-	IfxQspi_SpiMaster_initModule(&MasterHandle, &MasterConfig);
-
-	IfxQspi_SpiMaster_ChannelConfig MasterChConfig;
-	IfxQspi_SpiMaster_initChannelConfig(&MasterChConfig, &MasterHandle);
+    IfxQspi_SpiMaster_initModuleConfig(&MasterConfig, moudle);
+    MasterConfig.base.mode = SpiIf_Mode_master;
+    MasterConfig.base.maximumBaudrate = MAX_BAUD;
+    MasterConfig.base.isrProvider = IfxSrc_Tos_cpu0;
 
 
-	MasterChConfig.base.baudrate = (float)baud;
-	switch(mode)
-	{
-		case 0:
-		{
-			MasterChConfig.base.mode.clockPolarity = SpiIf_ClockPolarity_idleLow;//CPOL
-			MasterChConfig.base.mode.shiftClock = SpiIf_ShiftClock_shiftTransmitDataOnTrailingEdge;//CPHA
-		}break;
-		case 1:
-		{
-			MasterChConfig.base.mode.clockPolarity = SpiIf_ClockPolarity_idleLow;
-			MasterChConfig.base.mode.shiftClock = SpiIf_ShiftClock_shiftTransmitDataOnLeadingEdge;
-		}break;
-		case 2:
-		{
-			MasterChConfig.base.mode.clockPolarity = SpiIf_ClockPolarity_idleHigh;
-			MasterChConfig.base.mode.shiftClock = SpiIf_ShiftClock_shiftTransmitDataOnTrailingEdge;
-		}break;
-		case 3:
-		{
-			MasterChConfig.base.mode.clockPolarity = SpiIf_ClockPolarity_idleHigh;
-			MasterChConfig.base.mode.shiftClock = SpiIf_ShiftClock_shiftTransmitDataOnLeadingEdge;
-		}break;
+    MasterConfig.pins = &MasterPins;
+    IfxQspi_SpiMaster_initModule(&MasterHandle, &MasterConfig);
 
-	}
+    IfxQspi_SpiMaster_ChannelConfig MasterChConfig;
+    IfxQspi_SpiMaster_initChannelConfig(&MasterChConfig, &MasterHandle);
 
-	MasterChConfig.base.mode.dataHeading = SpiIf_DataHeading_msbFirst;
-	MasterChConfig.base.mode.dataWidth = 8;
 
-	MasterChConfig.base.mode.csActiveLevel = Ifx_ActiveState_low;
-	MasterChConfig.sls.output = SlsoPin;
-	IfxQspi_SpiMaster_initChannel(&MasterChHandle, &MasterChConfig);
+    MasterChConfig.base.baudrate = (float)baud;
+    switch(mode)
+    {
+        case 0:
+        {
+            MasterChConfig.base.mode.clockPolarity = SpiIf_ClockPolarity_idleLow;//CPOL
+            MasterChConfig.base.mode.shiftClock = SpiIf_ShiftClock_shiftTransmitDataOnTrailingEdge;//CPHA
+        }break;
+        case 1:
+        {
+            MasterChConfig.base.mode.clockPolarity = SpiIf_ClockPolarity_idleLow;
+            MasterChConfig.base.mode.shiftClock = SpiIf_ShiftClock_shiftTransmitDataOnLeadingEdge;
+        }break;
+        case 2:
+        {
+            MasterChConfig.base.mode.clockPolarity = SpiIf_ClockPolarity_idleHigh;
+            MasterChConfig.base.mode.shiftClock = SpiIf_ShiftClock_shiftTransmitDataOnTrailingEdge;
+        }break;
+        case 3:
+        {
+            MasterChConfig.base.mode.clockPolarity = SpiIf_ClockPolarity_idleHigh;
+            MasterChConfig.base.mode.shiftClock = SpiIf_ShiftClock_shiftTransmitDataOnLeadingEdge;
+        }break;
+
+    }
+
+    MasterChConfig.base.mode.dataHeading = SpiIf_DataHeading_msbFirst;
+    MasterChConfig.base.mode.dataWidth = 8;
+
+    MasterChConfig.base.mode.csActiveLevel = Ifx_ActiveState_low;
+    MasterChConfig.sls.output = SlsoPin;
+    IfxQspi_SpiMaster_initChannel(&MasterChHandle, &MasterChConfig);
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -251,67 +243,66 @@ void spi_init(SPIN_enum spi_n, SPI_PIN_enum sck_pin, SPI_PIN_enum mosi_pin, SPI_
 //  @param      continuous      本次通信是CS是否持续保持有效状态 1:持续保持  0:每传输完一个字节关闭CS(一般设置为1 即可)
 //  @return     void
 //  @since      v2.0
-//  Sample usage:       		spi_mosi(SPI_2,SPI2_CS0_P15_2,buf,buf,1,1);    //发送buff的内容，并接收到buf里，长度为1字节 通信期间CS持续拉低
+//  Sample usage:               spi_mosi(SPI_2,SPI2_CS0_P15_2,buf,buf,1,1);    //发送buff的内容，并接收到buf里，长度为1字节 通信期间CS持续拉低
 //-------------------------------------------------------------------------------------------------------------------
 void spi_mosi(SPIN_enum spi_n, SPI_PIN_enum cs_pin, uint8 *modata, uint8 *midata, uint32 len, uint8 continuous)
 {
-	uint32 i;
-	Ifx_QSPI_BACON bacon;
-	volatile Ifx_QSPI *moudle;
+    uint32 i;
+    Ifx_QSPI_BACON bacon;
+    volatile Ifx_QSPI *moudle;
 
-	moudle = IfxQspi_getAddress((IfxQspi_Index)spi_n);
+    moudle = IfxQspi_getAddress((IfxQspi_Index)spi_n);
 
-	bacon.U = moudle->BACON.U;
+    bacon.U = moudle->BACON.U;
 
-	bacon.B.DL = 7;
-	bacon.B.IDLE = 1;
-	bacon.B.IPRE = 1;
-	bacon.B.LEAD = 1;
-	bacon.B.LPRE = 1;
-	bacon.B.MSB = 1;
-	bacon.B.PARTYP = 0;
-	bacon.B.BYTE = 0;
-	bacon.B.TRAIL = 1;
-	bacon.B.TPRE = 1;
-	bacon.B.CS = cs_pin%102/6-3;
-	if(continuous)	IfxQspi_writeBasicConfigurationBeginStream(moudle, bacon.U);//发送数据后CS继续保持为低
-	else			IfxQspi_writeBasicConfigurationEndStream(moudle, bacon.U);	//每发送一个字节CS信号拉高一次
+    bacon.B.DL = 7;
+    bacon.B.IDLE = 1;
+    bacon.B.IPRE = 1;
+    bacon.B.LEAD = 1;
+    bacon.B.LPRE = 1;
+    bacon.B.MSB = 1;
+    bacon.B.PARTYP = 0;
+    bacon.B.BYTE = 0;
+    bacon.B.TRAIL = 1;
+    bacon.B.TPRE = 1;
+    bacon.B.CS = cs_pin%102/6-3;
+    if(continuous)    IfxQspi_writeBasicConfigurationBeginStream(moudle, bacon.U);//发送数据后CS继续保持为低
+    else            IfxQspi_writeBasicConfigurationEndStream(moudle, bacon.U);    //每发送一个字节CS信号拉高一次
 
-	if(len>1)
-	{
-		i = 0;
-		while(i < (len-1))
-		{
-			while(moudle->STATUS.B.TXFIFOLEVEL != 0);
-			IfxQspi_write8(moudle, IfxQspi_ChannelId_0, modata, 1);
-			while(moudle->STATUS.B.RXFIFOLEVEL == 0);
-			if(NULL != midata)	
-			{
-				IfxQspi_read8(moudle,midata,1);
-				midata++;
-			}
-			else				(void)moudle->RXEXIT.U;
-			modata++;
-			
-			i++;
-		}
-	}
+    if(len>1)
+    {
+        i = 0;
+        while(i < (len-1))
+        {
+            while(moudle->STATUS.B.TXFIFOLEVEL != 0);
+            IfxQspi_write8(moudle, IfxQspi_ChannelId_0, modata, 1);
+            while(moudle->STATUS.B.RXFIFOLEVEL == 0);
+            if(NULL != midata)    
+            {
+                IfxQspi_read8(moudle,midata,1);
+                midata++;
+            }
+            else                (void)moudle->RXEXIT.U;
+            modata++;
 
-	//发送最后一个数据
-	if(continuous)	IfxQspi_writeBasicConfigurationEndStream(moudle, bacon.U);
-	IfxQspi_writeTransmitFifo(moudle, *modata);
-	while(moudle->STATUS.B.TXFIFOLEVEL != 0);
+            i++;
+        }
+    }
 
-	while(moudle->STATUS.B.RXFIFOLEVEL == 0);
-	if(NULL != midata)	IfxQspi_read8(moudle,midata,1);
-	else				(void)moudle->RXEXIT.U;
+    //发送最后一个数据
+    if(continuous)    IfxQspi_writeBasicConfigurationEndStream(moudle, bacon.U);
+    IfxQspi_writeTransmitFifo(moudle, *modata);
+    while(moudle->STATUS.B.TXFIFOLEVEL != 0);
+
+    while(moudle->STATUS.B.RXFIFOLEVEL == 0);
+    if(NULL != midata)    IfxQspi_read8(moudle,midata,1);
+    else                (void)moudle->RXEXIT.U;
 }
 ```
 
 > 基于上面的SPI库，ICM42605的驱动和使用实现
 
 ```c
-
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      ICM42606 SPI写寄存器
 //  @param      cmd     寄存器地址
@@ -391,7 +382,7 @@ uint8 icm42605_init(void)
     icm42605_spi_w_reg_byte(reg_bank_sel,0x00);  //设置bank 0区域寄存器
     icm42605_spi_w_reg_byte(device_config_reg,bit_soft_reset_chip_config);  //软复位传感器
     systick_delay_ms(STM0,50);
-  
+
     if(reg_val == 0x42) {
         icm42605_spi_w_reg_byte(reg_bank_sel,0x01);  //设置bank 1区域寄存器
         icm42605_spi_w_reg_byte(intf_config4,0x02);  //设置为4线SPI通信
@@ -446,16 +437,11 @@ uint8 icm42605_init(void)
         return 1;
     }
 }
-
-
-
-
 ```
 
 > 对ICM42605的关键数据读取
 
 ```c
-
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      获取ICM42605加速度计数据
 //  @param      NULL
@@ -501,17 +487,7 @@ void get_icm42605_gyro_spi(void)
     icm_gyro_y = (int16)(((uint16)buf.dat[2]<<8 | buf.dat[3]));
     icm_gyro_z = (int16)(((uint16)buf.dat[4]<<8 | buf.dat[5]));
 }
-
-
-
 ```
-
- <h4>屏幕：</h4>
-<li>屏幕的驱动已经成熟，主设备和屏幕的通信方式采用IPS，请同学下载相关例程进行学习。</li>
-</ul>
-</li>    
-
-
 
 ### 五.合适的调参工具
 
